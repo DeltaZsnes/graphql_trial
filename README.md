@@ -18,6 +18,7 @@ Trial project for graphql evaluation and experiments
  
 # Todo
  - GetList FilterByProperty IN EQ GT GE LE LT NOT!
+ - GetList OrderByProperty
  - GetList PaginateBySkip
  - GetList PaginateByToken
  - SearchList
