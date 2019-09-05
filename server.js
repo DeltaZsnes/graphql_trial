@@ -1,26 +1,27 @@
-var express = require("express");
-var express_graphql = require("express-graphql");
-var { buildSchema } = require("graphql");
+const express = require("express");
+const express_graphql = require("express-graphql");
+const { buildSchema } = require("graphql");
+const fs = require("fs");
+const path = require("path");
 
 const listenPort = 4000;
 
-// GraphQL schema
-var schema = buildSchema(`
-type Query {
-    message: String
-}
-`);
+const serverSchema = fs.readFileSync(
+	path.resolve(__dirname, "serverSchema.graphql"),
+	"utf8"
+);
+const schema = buildSchema(serverSchema);
 
-var root = {
+const rootValue = {
 	message: () => "Hello World!"
 };
 
-var app = express();
+const app = express();
 app.use(
 	"/graphql",
 	express_graphql({
-		schema: schema,
-		rootValue: root,
+		schema,
+		rootValue,
 		graphiql: true
 	})
 );
