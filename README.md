@@ -17,6 +17,7 @@ Trial project for graphql evaluation and experiments
  - GetById
  
 # Todo
+ - GetList FilterByProperty IN EQ GT GE LE LT NOT!
  - GetList PaginateBySkip
  - GetList PaginateByToken
  - SearchList
