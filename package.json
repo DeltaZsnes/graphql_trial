@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/DeltaZsnes/graphql_trial/issues"
   },
-  "homepage": "https://github.com/DeltaZsnes/graphql_trial#readme"
+  "homepage": "https://github.com/DeltaZsnes/graphql_trial#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^14.5.4",
+    "save": "^2.4.0"
+  }
 }
