@@ -8,18 +8,18 @@ Trial project for graphql evaluation and experiments
  - GraphIQL
 
 # Commands
- - node server.js
- - node client.js
+ - npm run dev
+ - npm run test
 
 # Tests
- - Hello World
- - GetList
- - GetById
+ - List
+ - Filter EQ
+ - Sort Default
+ - Sort Ascending
+ - Sort Descending
  
 # Todo
  - GetList FilterByProperty IN EQ GT GE LE LT NOT!
- - GetList OrderByProperty
- - GetList PaginateBySkip
  - GetList PaginateByToken
  - SearchList
  - SearchList PaginateBySkip
