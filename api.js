@@ -49,28 +49,35 @@ function takeData(data, take) {
 }
 
 const rootValue = {
-	course: ({filterInput = {}, pageInput = {}, orderInput = []}) => {
+	course: ({filter = {}, page = {}, sort = []}) => {
 		var data = coursesData;
 		
-		if(filterInput.id){
-			data = data.filter(i => i.id == filterInput.id);
+		if(filter.id){
+			data = data.filter(i => i.id == filter.id);
+		}
+		
+		if(filter.title){
+			data = data.filter(i => i.title == filter.title);
+		}
+		
+		if(filter.url){
+			data = data.filter(i => i.url == filter.url);
 		}
 		
 		const {
 			skip,
 			take,
-		} = pageInput;
+		} = page;
 		
 		if (skip && take) {
 			data = skipData(data, skip);
 			data = takeData(data, take);
 		}
 		
-		orderInput.forEach(({
+		sort.forEach(({
 			property,
 			direction
 		}) => {
-			console.log({property, direction});
 			data = data.sort((a, b) => {
 				if (a[property] > b[property]) {
 					return direction ? -1 : +1;

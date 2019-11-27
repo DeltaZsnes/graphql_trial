@@ -1,8 +1,8 @@
 type Query {
 	course(
-		pageInput: PageInput
-		filterInput: CourseFilterInput
-		orderInput: [CourseOrderInput!]
+		page: PageInput
+		filter: CourseFilterInput
+		sort: [CourseSortInput!]
 	): CoursePage!
 }
 
@@ -41,12 +41,12 @@ input CourseFilterInput {
 	url: String
 }
 
-input CourseOrderInput {
-	property: CourseOrderEnum
+input CourseSortInput {
+	property: CourseSortEnum
 	direction: Boolean
 }
 
-enum CourseOrderEnum {
+enum CourseSortEnum {
 	id
 	title
 	author
