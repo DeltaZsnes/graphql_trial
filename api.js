@@ -49,7 +49,7 @@ function takeData(data, take) {
 }
 
 const rootValue = {
-	course: ({filterInput = {}, pageInput = {}, orderInput = {}}) => {
+	course: ({filterInput = {}, pageInput = {}, orderInput = []}) => {
 		var data = coursesData;
 		
 		if(filterInput.id){
@@ -66,9 +66,21 @@ const rootValue = {
 			data = takeData(data, take);
 		}
 		
-		// if(orderInput.id){
-		// 	data = data.filter(i => i.id == filterInput.id);
-		// }
+		orderInput.forEach(({
+			property,
+			direction
+		}) => {
+			console.log({property, direction});
+			data = data.sort((a, b) => {
+				if (a[property] > b[property]) {
+					return direction ? -1 : +1;
+				}
+				if (b[property] > a[property]) {
+					return direction ? +1 : -1;
+				}
+				return 0;
+			});
+		});
 		
 		return {
 			skip: skip,

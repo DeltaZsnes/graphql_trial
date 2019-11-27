@@ -2,7 +2,7 @@ type Query {
 	course(
 		pageInput: PageInput
 		filterInput: CourseFilterInput
-		orderInput: CourseOrderInput
+		orderInput: [CourseOrderInput!]
 	): CoursePage!
 }
 
@@ -42,9 +42,14 @@ input CourseFilterInput {
 }
 
 input CourseOrderInput {
-	id: Boolean
-	title: Boolean
-	author: Boolean
-	topic: Boolean
-	url: Boolean
+	property: CourseOrderEnum
+	direction: Boolean
+}
+
+enum CourseOrderEnum {
+	id
+	title
+	author
+	topic
+	url
 }
