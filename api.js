@@ -40,21 +40,35 @@ var coursesData = [{
 	}
 ]
 
+function skipData(data, skip) {
+	return data.slice(skip);
+}
+
+function takeData(data, take) {
+	return data.slice(0, take);
+}
+
 const rootValue = {
 	courses: (args) => {
 		const {
-			quiz
+			pageInput
 		} = args;
+		
+		const {
+			skip,
+			take,
+		} = pageInput;
 
 		var data = coursesData;
 
-		if (quiz) {
-			data = coursesData.slice(quiz.skip, quiz.skip + quiz.take);
+		if (skip && take) {
+			data = skipData(data, skip);
+			data = takeData(data, take);
 		}
 		
 		return {
-			skip: quiz.skip,
-			take: quiz.take,
+			skip: skip,
+			take: take,
 			hits: data.length,
 			data: data,
 		};

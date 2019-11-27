@@ -1,5 +1,5 @@
 type Query {
-	courses(quiz: Quiz!): CoursePage!
+	courses(pageInput: PageInput): CoursePage!
 }
 
 type Course {
@@ -21,11 +21,10 @@ type CoursePage implements Page {
 	skip: Int!
 	take: Int!
 	hits: Int!
-	data: [Course]!
+	data: [Course!]!
 }
 
-input Quiz {
+input PageInput {
 	skip: Int!
 	take: Int!
 }
-
