@@ -49,22 +49,26 @@ function takeData(data, take) {
 }
 
 const rootValue = {
-	courses: (args) => {
-		const {
-			pageInput
-		} = args;
+	course: ({filterInput = {}, pageInput = {}, orderInput = {}}) => {
+		var data = coursesData;
+		
+		if(filterInput.id){
+			data = data.filter(i => i.id == filterInput.id);
+		}
 		
 		const {
 			skip,
 			take,
 		} = pageInput;
-
-		var data = coursesData;
-
+		
 		if (skip && take) {
 			data = skipData(data, skip);
 			data = takeData(data, take);
 		}
+		
+		// if(orderInput.id){
+		// 	data = data.filter(i => i.id == filterInput.id);
+		// }
 		
 		return {
 			skip: skip,

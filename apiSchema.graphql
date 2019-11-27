@@ -1,5 +1,9 @@
 type Query {
-	courses(pageInput: PageInput): CoursePage!
+	course(
+		pageInput: PageInput
+		filterInput: CourseFilterInput
+		orderInput: CourseOrderInput
+	): CoursePage!
 }
 
 type Course {
@@ -12,19 +16,35 @@ type Course {
 }
 
 interface Page {
-	skip: Int!
-	take: Int!
-	hits: Int!
+	skip: Int
+	take: Int
+	hits: Int
 }
 
 type CoursePage implements Page {
-	skip: Int!
-	take: Int!
-	hits: Int!
+	skip: Int
+	take: Int
+	hits: Int
 	data: [Course!]!
 }
 
 input PageInput {
 	skip: Int!
 	take: Int!
+}
+
+input CourseFilterInput {
+	id: Int
+	title: String
+	author: String
+	topic: String
+	url: String
+}
+
+input CourseOrderInput {
+	id: Boolean
+	title: Boolean
+	author: Boolean
+	topic: Boolean
+	url: Boolean
 }
