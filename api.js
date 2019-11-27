@@ -46,23 +46,18 @@ const rootValue = {
 			quiz
 		} = args;
 
+		var data = coursesData;
+
 		if (quiz) {
-			const data = coursesData.slice(quiz.skip, quiz.skip + quiz.take);
-			return {
-				skip: quiz.skip,
-				take: quiz.take,
-				hits: data.length,
-				data: data,
-			};
-		} else {
-			const data = coursesData;
-			return {
-				skip: quiz.skip,
-				take: quiz.take,
-				hits: data.length,
-				data: data,
-			};
+			data = coursesData.slice(quiz.skip, quiz.skip + quiz.take);
 		}
+		
+		return {
+			skip: quiz.skip,
+			take: quiz.take,
+			hits: data.length,
+			data: data,
+		};
 	},
 };
 
