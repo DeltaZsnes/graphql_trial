@@ -1,3 +1,48 @@
+interface Entity {
+	id: Int!
+}
+
+interface Page {
+	skip: Int
+	take: Int
+	hits: Int
+	list: [Entity!]!
+}
+
+type Course implements Entity {
+	id: Int!
+	title: String
+	author: String
+	topic: String
+	url: String
+	description: String
+}
+
+type CoursePage implements Page {
+	skip: Int
+	take: Int
+	hits: Int
+	list: [Course!]!
+}
+
+enum CourseKey {
+	id
+	title
+	author
+	topic
+	url
+}
+
+input CourseSort {
+	key: CourseKey
+	direction: Boolean
+}
+
+input CourseCompare {
+	key: CourseKey!
+	set: [String]!
+}
+
 type Query {
 	course(
 		eq: [CourseCompare!]
@@ -11,49 +56,4 @@ type Query {
 		skip: Int
 		take: Int
 	): CoursePage!
-}
-
-interface Entity {
-	id: Int!
-}
-
-type Course implements Entity {
-	id: Int!
-	title: String
-	author: String
-	topic: String
-	url: String
-	description: String
-}
-
-interface Page {
-	skip: Int
-	take: Int
-	hits: Int
-	list: [Entity!]!
-}
-
-type CoursePage implements Page {
-	skip: Int
-	take: Int
-	hits: Int
-	list: [Course!]!
-}
-
-input CourseSort {
-	key: CourseKey
-	direction: Boolean
-}
-
-input CourseCompare {
-	key: CourseKey!
-	set: [String]!
-}
-
-enum CourseKey {
-	id
-	title
-	author
-	topic
-	url
 }
