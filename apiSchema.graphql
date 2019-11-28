@@ -1,8 +1,15 @@
 type Query {
 	course(
-		paging: Paging
-		filter: CourseFilter
+		eq: [CourseInInput!]
+		nq: [CourseInInput!]
+		lt: [CourseInInput!]
+		le: [CourseInInput!]
+		gt: [CourseInInput!]
+		ge: [CourseInInput!]
+		search: [String!]
 		sort: [CourseSort!]
+		skip: Int
+		take: Int
 	): CoursePage!
 }
 
@@ -26,22 +33,6 @@ type CoursePage implements Page {
 	take: Int
 	hits: Int
 	data: [Course!]!
-}
-
-input Paging {
-	skip: Int!
-	take: Int!
-}
-
-input CourseFilter {
-	eq: [AB!]
-	nq: [AB!]
-	lt: [AB!]
-	le: [AB!]
-	gt: [AB!]
-	ge: [AB!]
-	in: [CourseInInput!]
-	sq: [String!]
 }
 
 input CourseSort {

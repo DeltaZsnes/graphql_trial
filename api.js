@@ -49,59 +49,68 @@ function takeData(data, take) {
 }
 
 const rootValue = {
-	course: ({filter = {}, paging = {}, sort = []}) => {
+	course: (args) => {
+		const {
+			eq,
+			nq,
+			lt,
+			lq,
+			gt,
+			ge,
+			search,
+			sort,
+			skip,
+			take,
+		} = args;
+
 		var data = coursesData;
-		
-		if(filter.eq){
-			filter.eq.forEach(({A, B}) => {
-				data = data.filter(i => i[A] == B);
+
+		if (eq) {
+			eq.forEach(({
+				A,
+				B
+			}) => {
+				data = data.filter(i => B.includes(String(i[A])));
 			});
 		}
-		
-		if(filter.nq){
-			filter.nq.forEach(({A, B}) => {
-				data = data.filter(i => i[A] != B);
+
+		if (nq) {
+			nq.forEach(({
+				A,
+				B
+			}) => {
+				data = data.filter(i => !B.includes(String(i[A])));
 			});
 		}
-		
-		if(filter.in){
-			filter.in.forEach(({A, B}) => {
-				data = data.filter(i => B.includes(i[A]));
-			});
-		}
-		
-		if(filter.sq){
-			filter.sq.forEach((value) => {
-				console.log(value)
+
+		if (search) {
+			search.forEach((value) => {
 				data = data.filter(i => i.description.includes(value));
 			});
 		}
-		
-		const {
-			skip,
-			take,
-		} = paging;
-		
+
+		if (sort) {
+			sort.forEach(({
+				property,
+				direction
+			}) => {
+				data = data.sort((a, b) => {
+					if (a[property] > b[property]) {
+						return direction ? -1 : +1;
+					}
+					if (b[property] > a[property]) {
+						return direction ? +1 : -1;
+					}
+					return 0;
+				});
+			});
+		}
+
 		if (skip && take) {
 			data = skipData(data, skip);
 			data = takeData(data, take);
 		}
-		
-		sort.forEach(({
-			property,
-			direction
-		}) => {
-			data = data.sort((a, b) => {
-				if (a[property] > b[property]) {
-					return direction ? -1 : +1;
-				}
-				if (b[property] > a[property]) {
-					return direction ? +1 : -1;
-				}
-				return 0;
-			});
-		});
-		
+
 		return {
 			skip: skip,
 			take: take,
