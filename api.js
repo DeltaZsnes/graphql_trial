@@ -48,8 +48,8 @@ function takeData(data, take) {
 	return data.slice(0, take);
 }
 
-const rootValue = {
-	course: (args) => {
+const courseGet = (args) => {
+	(args) => {
 		const {
 			eq,
 			nq,
@@ -106,8 +106,11 @@ const rootValue = {
 			});
 		}
 
-		if (skip && take) {
+		if (skip) {
 			data = skipData(data, skip);
+		}
+
+		if (take) {
 			data = takeData(data, take);
 		}
 
@@ -117,7 +120,11 @@ const rootValue = {
 			hits: data.length,
 			data: data,
 		};
-	},
+	}
+}
+
+const rootValue = {
+	course: courseGet,
 };
 
 const app = express();
