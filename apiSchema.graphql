@@ -13,7 +13,11 @@ type Query {
 	): CoursePage!
 }
 
-type Course {
+interface Entity {
+	id: Int!
+}
+
+type Course implements Entity {
 	id: Int!
 	title: String
 	author: String
@@ -26,6 +30,7 @@ interface Page {
 	skip: Int
 	take: Int
 	hits: Int
+	list: [Entity!]!
 }
 
 type CoursePage implements Page {
@@ -36,7 +41,7 @@ type CoursePage implements Page {
 }
 
 input CourseSort {
-	property: CourseKey
+	key: CourseKey
 	direction: Boolean
 }
 

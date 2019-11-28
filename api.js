@@ -90,14 +90,14 @@ const courseGet = (args) => {
 
 	if (sort) {
 		sort.forEach(({
-			property,
+			key,
 			direction
 		}) => {
 			list = list.sort((a, b) => {
-				if (a[property] > b[property]) {
+				if (a[key] > b[key]) {
 					return direction ? -1 : +1;
 				}
-				if (b[property] > a[property]) {
+				if (b[key] > a[key]) {
 					return direction ? +1 : -1;
 				}
 				return 0;
