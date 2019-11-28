@@ -64,6 +64,19 @@ const rootValue = {
 			});
 		}
 		
+		if(filter.in){
+			filter.in.forEach(({A, B}) => {
+				data = data.filter(i => B.includes(i[A]));
+			});
+		}
+		
+		if(filter.sq){
+			filter.sq.forEach((value) => {
+				console.log(value)
+				data = data.filter(i => i.description.includes(value));
+			});
+		}
+		
 		const {
 			skip,
 			take,

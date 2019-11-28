@@ -41,6 +41,7 @@ input CourseFilter {
 	gt: [AB!]
 	ge: [AB!]
 	in: [CourseInInput!]
+	sq: [String!]
 }
 
 input CourseSort {
