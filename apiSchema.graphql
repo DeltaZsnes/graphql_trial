@@ -1,11 +1,11 @@
 type Query {
 	course(
-		eq: [CourseInInput!]
-		nq: [CourseInInput!]
-		lt: [CourseInInput!]
-		le: [CourseInInput!]
-		gt: [CourseInInput!]
-		ge: [CourseInInput!]
+		eq: [CourseCompare!]
+		nq: [CourseCompare!]
+		lt: [CourseCompare!]
+		le: [CourseCompare!]
+		gt: [CourseCompare!]
+		ge: [CourseCompare!]
 		search: [String!]
 		sort: [CourseSort!]
 		skip: Int
@@ -40,14 +40,9 @@ input CourseSort {
 	direction: Boolean
 }
 
-input AB {
-	A: CourseKey!
-	B: String
-}
-
-input CourseInInput {
-	A: CourseKey!
-	B: [String]
+input CourseCompare {
+	key: CourseKey!
+	set: [String]!
 }
 
 enum CourseKey {

@@ -67,25 +67,25 @@ const rootValue = {
 
 		if (eq) {
 			eq.forEach(({
-				A,
-				B
+				key,
+				set
 			}) => {
-				data = data.filter(i => B.includes(String(i[A])));
+				data = data.filter(i => set.includes(String(i[key])));
 			});
 		}
 
 		if (nq) {
 			nq.forEach(({
-				A,
-				B
+				key,
+				set
 			}) => {
-				data = data.filter(i => !B.includes(String(i[A])));
+				data = data.filter(i => !set.includes(String(i[key])));
 			});
 		}
 
 		if (search) {
-			search.forEach((value) => {
-				data = data.filter(i => i.description.includes(value));
+			search.forEach(key => {
+				data = data.filter(i => i.description.includes(key));
 			});
 		}
 
