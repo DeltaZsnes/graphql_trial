@@ -49,79 +49,77 @@ function takeData(data, take) {
 }
 
 const courseGet = (args) => {
-	(args) => {
-		const {
-			eq,
-			nq,
-			lt,
-			lq,
-			gt,
-			ge,
-			search,
-			sort,
-			skip,
-			take,
-		} = args;
+	const {
+		eq,
+		nq,
+		lt,
+		lq,
+		gt,
+		ge,
+		search,
+		sort,
+		skip,
+		take,
+	} = args;
 
-		var data = coursesData;
+	var data = coursesData;
 
-		if (eq) {
-			eq.forEach(({
-				key,
-				set
-			}) => {
-				data = data.filter(i => set.includes(String(i[key])));
-			});
-		}
-
-		if (nq) {
-			nq.forEach(({
-				key,
-				set
-			}) => {
-				data = data.filter(i => !set.includes(String(i[key])));
-			});
-		}
-
-		if (search) {
-			search.forEach(key => {
-				data = data.filter(i => i.description.includes(key));
-			});
-		}
-
-		if (sort) {
-			sort.forEach(({
-				property,
-				direction
-			}) => {
-				data = data.sort((a, b) => {
-					if (a[property] > b[property]) {
-						return direction ? -1 : +1;
-					}
-					if (b[property] > a[property]) {
-						return direction ? +1 : -1;
-					}
-					return 0;
-				});
-			});
-		}
-
-		if (skip) {
-			data = skipData(data, skip);
-		}
-
-		if (take) {
-			data = takeData(data, take);
-		}
-
-		return {
-			skip: skip,
-			take: take,
-			hits: data.length,
-			data: data,
-		};
+	if (eq) {
+		eq.forEach(({
+			key,
+			set
+		}) => {
+			data = data.filter(i => set.includes(String(i[key])));
+		});
 	}
-}
+
+	if (nq) {
+		nq.forEach(({
+			key,
+			set
+		}) => {
+			data = data.filter(i => !set.includes(String(i[key])));
+		});
+	}
+
+	if (search) {
+		search.forEach(key => {
+			data = data.filter(i => i.description.includes(key));
+		});
+	}
+
+	if (sort) {
+		sort.forEach(({
+			property,
+			direction
+		}) => {
+			data = data.sort((a, b) => {
+				if (a[property] > b[property]) {
+					return direction ? -1 : +1;
+				}
+				if (b[property] > a[property]) {
+					return direction ? +1 : -1;
+				}
+				return 0;
+			});
+		});
+	}
+
+	if (skip) {
+		data = skipData(data, skip);
+	}
+
+	if (take) {
+		data = takeData(data, take);
+	}
+
+	return {
+		skip: skip,
+		take: take,
+		hits: data.length,
+		data: data,
+	};
+};
 
 const rootValue = {
 	course: courseGet,
