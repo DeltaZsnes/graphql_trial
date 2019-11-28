@@ -1,8 +1,8 @@
 type Query {
 	course(
-		page: PageInput
-		filter: CourseFilterInput
-		sort: [CourseSortInput!]
+		paging: Paging
+		filter: CourseFilter
+		sort: [CourseSort!]
 	): CoursePage!
 }
 
@@ -10,9 +10,9 @@ type Course {
 	id: Int!
 	title: String
 	author: String
-	description: String
 	topic: String
 	url: String
+	description: String
 }
 
 interface Page {
@@ -28,25 +28,37 @@ type CoursePage implements Page {
 	data: [Course!]!
 }
 
-input PageInput {
+input Paging {
 	skip: Int!
 	take: Int!
 }
 
-input CourseFilterInput {
-	id: Int
-	title: String
-	author: String
-	topic: String
-	url: String
+input CourseFilter {
+	eq: [AB!]
+	nq: [AB!]
+	lt: [AB!]
+	le: [AB!]
+	gt: [AB!]
+	ge: [AB!]
+	in: [CourseInInput!]
 }
 
-input CourseSortInput {
-	property: CourseSortEnum
+input CourseSort {
+	property: CourseKey
 	direction: Boolean
 }
 
-enum CourseSortEnum {
+input AB {
+	A: CourseKey!
+	B: String
+}
+
+input CourseInInput {
+	A: CourseKey!
+	B: [String]
+}
+
+enum CourseKey {
 	id
 	title
 	author
