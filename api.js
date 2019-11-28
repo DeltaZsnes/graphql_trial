@@ -14,7 +14,7 @@ const serverSchema = fs.readFileSync(
 );
 const schema = buildSchema(serverSchema);
 
-var coursesData = [{
+var courseList = [{
 		id: 1,
 		title: 'The Complete Node.js Developer Course',
 		author: 'Andrew Mead, Rob Percival',
@@ -40,12 +40,12 @@ var coursesData = [{
 	}
 ]
 
-function skipData(data, skip) {
-	return data.slice(skip);
+function skipData(list, skip) {
+	return list.slice(skip);
 }
 
-function takeData(data, take) {
-	return data.slice(0, take);
+function takeData(list, take) {
+	return list.slice(0, take);
 }
 
 const courseGet = (args) => {
@@ -62,14 +62,14 @@ const courseGet = (args) => {
 		take,
 	} = args;
 
-	var data = coursesData;
+	var list = courseList;
 
 	if (eq) {
 		eq.forEach(({
 			key,
 			set
 		}) => {
-			data = data.filter(i => set.includes(String(i[key])));
+			list = list.filter(i => set.includes(String(i[key])));
 		});
 	}
 
@@ -78,13 +78,13 @@ const courseGet = (args) => {
 			key,
 			set
 		}) => {
-			data = data.filter(i => !set.includes(String(i[key])));
+			list = list.filter(i => !set.includes(String(i[key])));
 		});
 	}
 
 	if (search) {
 		search.forEach(key => {
-			data = data.filter(i => i.description.includes(key));
+			list = list.filter(i => i.description.includes(key));
 		});
 	}
 
@@ -93,7 +93,7 @@ const courseGet = (args) => {
 			property,
 			direction
 		}) => {
-			data = data.sort((a, b) => {
+			list = list.sort((a, b) => {
 				if (a[property] > b[property]) {
 					return direction ? -1 : +1;
 				}
@@ -106,18 +106,18 @@ const courseGet = (args) => {
 	}
 
 	if (skip) {
-		data = skipData(data, skip);
+		list = skipData(list, skip);
 	}
 
 	if (take) {
-		data = takeData(data, take);
+		list = takeData(list, take);
 	}
 
 	return {
 		skip: skip,
 		take: take,
-		hits: data.length,
-		data: data,
+		hits: list.length,
+		list: list,
 	};
 };
 

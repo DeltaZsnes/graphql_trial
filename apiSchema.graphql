@@ -32,7 +32,7 @@ type CoursePage implements Page {
 	skip: Int
 	take: Int
 	hits: Int
-	data: [Course!]!
+	list: [Course!]!
 }
 
 input CourseSort {
