@@ -121,8 +121,15 @@ const courseGet = (args) => {
 	};
 };
 
+const patchCourse = (args) => {
+	console.log(args);
+	var list = courseList;
+	return list[0];
+};
+
 const rootValue = {
 	course: courseGet,
+	patchCourse,
 };
 
 const app = express();

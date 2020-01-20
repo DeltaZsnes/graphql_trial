@@ -18,6 +18,14 @@ type Course implements Entity {
 	description: String
 }
 
+input CourseInput {
+	title: String
+	author: String
+	topic: String
+	url: String
+	description: String
+}
+
 type CoursePage implements Page {
 	skip: Int
 	take: Int
@@ -56,4 +64,8 @@ type Query {
 		skip: Int
 		take: Int
 	): CoursePage!
+}
+
+type Mutation {
+  	patchCourse(course: CourseInput!): Course!
 }
