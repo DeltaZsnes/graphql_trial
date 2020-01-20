@@ -64,6 +64,11 @@ type Query {
 		skip: Int
 		take: Int
 	): CoursePage!
+	
+	searchCourse(
+		skip: Int
+		take: Int
+	): CoursePage!
 }
 
 type Mutation {

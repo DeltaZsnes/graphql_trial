@@ -127,9 +127,28 @@ const patchCourse = (args) => {
 	return list[0];
 };
 
+const searchCourse = (args, root, context, info) => {
+	console.log({args, root, context, info});
+	
+	const {
+		skip,
+		take,
+	} = args;
+	
+	var list = courseList;
+	
+	return {
+		skip: skip,
+		take: take,
+		hits: list.length,
+		list: list,
+	};
+};
+
 const rootValue = {
 	course: courseGet,
 	patchCourse,
+	searchCourse,
 };
 
 const app = express();
